@@ -1,19 +1,9 @@
 import React, { useEffect, useState } from "react";
-// import { useSelector, useDispatch } from "react-redux";
-import { Card, Button, Container, Image, ListGroup, Spinner } from 'react-bootstrap';
-import { Redirect } from "react-router-dom";
-import Jumbotron from 'react-bootstrap/Jumbotron'
-import "./profile.css";
-// import "../src/profile.css";
-import { useHistory } from "react-router-dom";
+import "../css/profile.css";
 import Modal from "./modal"
 const BuilderComponent = () => {
-    const [profileData, setProfileData] = useState([]);
-    const [contactform, setcontactform] = useState(false);
     const [showModal, setModal] = useState(false);
-    const [showText, setShowText] = useState(false);
     let text = localStorage.getItem("text");
-    console.log("text", text);
     let editedText = localStorage.getItem("editedText");
     let Xvalue = localStorage.getItem("Xvalue");
     let Yvalue = localStorage.getItem("Yvalue");
@@ -25,11 +15,9 @@ const BuilderComponent = () => {
     }
 
     function drag(ev) {
-        console.log("ondrag", ev.target.id);
         ev.dataTransfer.setData("text", ev.target.id);
     }
     function drop(ev) {
-        console.log("showModal")
         setModal(!showModal);
         ev.preventDefault();
         var data = ev.dataTransfer.getData("text");
@@ -53,6 +41,7 @@ const BuilderComponent = () => {
             d.style.fontWeight = fontWeight;
             d.style.marginLeft = Xvalue + 'px';
             d.style.marginTop = Yvalue + 'px';
+            d.style.backgroundColor = "#f2f2f2";
         }
 
     }, [editedText])
@@ -61,10 +50,19 @@ const BuilderComponent = () => {
     }
     const droptextLabel = (ev) => {
         ev.preventDefault();
-        var dataValue = ev.dataTransfer.getData("text");
-        var label = document.getElementById("textlabel");
-        label.style.width = "50%";
-        ev.target.appendChild(document.getElementById(dataValue));
+        let data = document.getElementById("drag1");
+        let textlabel = document.getElementById("textlabel")
+        if (data) {
+            setModal(true)
+        }
+        if (textlabel) {
+            setModal(false);
+            var dataValue = ev.dataTransfer.getData("text");
+            var label = document.getElementById("textlabel");
+            label.style.width = "50%";
+            ev.target.appendChild(document.getElementById(dataValue));
+        }
+
     }
     const allowDropTextlabel = (ev) => {
         ev.preventDefault();
@@ -74,7 +72,6 @@ const BuilderComponent = () => {
         var label = document.getElementById("textlabel");
         label.style.border = "5px solid red";
         label.style.width = "50%";
-        //handleKeyDown(event);
     }
     const handleKeyDown = (event) => {
         if (event.key === "Delete") {
@@ -82,13 +79,11 @@ const BuilderComponent = () => {
             label.style.display = "none";
             localStorage.setItem("text", "");
             localStorage.setItem("editedText", false);
+
         }
-        // event.preventDefault();
         if (event.key === "Enter") {
             setModal(!showModal);
         }
-
-
     }
     return (
         <>
@@ -108,11 +103,7 @@ const BuilderComponent = () => {
                 {!editedText ?
                     <div className="w3-container">
                         {showModal ? <Modal /> : ""}
-
                         <div id="div1" onDrop={(e) => drop(e)} onDragOver={(e) => allowDrop(e)}></div>
-
-
-
                     </div>
                     : <div className="w3-container">
                         <div id="div2" onDrop={(e) => droptextLabel(e)} onDragOver={(e) => allowDropTextlabel(e)}>

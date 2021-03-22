@@ -1,5 +1,5 @@
-import './profile.css';
-import ProfileComponent from "./builder";
+// import './profile.css';
+import ProfileComponent from "./components/builder";
 import 'font-awesome/css/font-awesome.min.css';
 function App() {
   return (

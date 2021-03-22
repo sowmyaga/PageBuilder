@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./modal.css";
+import "../css/modal.css";
 const AddContactForm = () => {
     const [show, setShow] = useState(true);
     let XPos = localStorage.getItem("Xvalue");
