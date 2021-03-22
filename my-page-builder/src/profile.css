@@ -1,0 +1,28 @@
+
+#div1 {
+  width: 80%;
+  height: 100vh;
+  padding: 10px;
+  background-color:#8080800a;;
+}
+#div2{
+    height: 100%;
+  width: 100%;
+  border: 3px solid black;
+  padding: 250px;
+}
+#textValue:hover {
+  color: red;
+}
+.drag{
+  background-color: white;
+    padding: 13px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+#drag1,#drag2,#drag3{
+  color:black
+}
+.modal {
+    padding: 0px 16px;
+}
